@@ -8,22 +8,19 @@ export class App extends Component {
     good: 0,
     neutral: 0,
     bad: 0,
-    total: 0,
-    positivePercentage: 0,
   };
 
   handleInc = status => {
     this.setState(prevState => ({
       [status]: prevState[status] + 1,
-      total: prevState.total + 1,
-      positivePercentage: this.getPercentage(
-        prevState.total + 1,
-        status === 'good' ? prevState.good + 1 : prevState.good
-      ),
     }));
   };
 
-  getPercentage = (total, good) => {
+  countTotalFeedback = (good, neutral, bad) => {
+    return good + neutral + bad;
+  };
+
+  countPositiveFeedbackPercentage = (total, good) => {
     if (total > 0 && good === 0) {
       return 0;
     } else {
@@ -32,7 +29,9 @@ export class App extends Component {
   };
 
   render() {
-    const { good, neutral, bad, total, positivePercentage } = this.state;
+    const { good, neutral, bad } = this.state;
+    const total = this.countTotalFeedback(good, neutral, bad);
+    const percentage = this.countPositiveFeedbackPercentage(total, good);
     return (
       <div
         style={{
@@ -48,7 +47,7 @@ export class App extends Component {
             neutral={neutral}
             bad={bad}
             total={total}
-            positivePercentage={positivePercentage}
+            positivePercentage={percentage}
           />
         </Section>
       </div>
