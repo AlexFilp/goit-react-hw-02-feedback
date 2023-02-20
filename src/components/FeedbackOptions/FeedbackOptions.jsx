@@ -1,15 +1,17 @@
+import { Container, Btn } from './FeedbackOptions.styled';
+
 export const FeedbackOptions = ({ onClick }) => {
   return (
-    <>
-      <button type="button" onClick={() => onClick('good')}>
+    <Container>
+      <Btn type="button" onClick={() => onClick('good')}>
         Good
-      </button>
-      <button type="button" onClick={() => onClick('neutral')}>
+      </Btn>
+      <Btn type="button" onClick={() => onClick('neutral')}>
         Neutral
-      </button>
-      <button type="button" onClick={() => onClick('bad')}>
+      </Btn>
+      <Btn type="button" onClick={() => onClick('bad')}>
         Bad
-      </button>
-    </>
+      </Btn>
+    </Container>
   );
 };
